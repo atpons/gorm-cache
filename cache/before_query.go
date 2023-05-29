@@ -9,7 +9,7 @@ import (
 
 	"github.com/Pacific73/gorm-cache/config"
 	"github.com/Pacific73/gorm-cache/util"
-	"github.com/go-redis/redis"
+	"github.com/redis/rueidis"
 	"gorm.io/gorm"
 	"gorm.io/gorm/callbacks"
 )
@@ -36,7 +36,7 @@ func BeforeQuery(cache *Gorm2Cache) func(db *gorm.DB) {
 
 				cacheValue, err := cache.GetSearchCache(ctx, tableName, sql, db.Statement.Vars...)
 				if err != nil {
-					if !errors.Is(err, redis.Nil) {
+					if !errors.Is(err, rueidis.Nil) {
 						cache.Logger.CtxError(ctx, "[BeforeQuery] get cache value for sql %s error: %v", sql, err)
 					}
 					db.Error = nil

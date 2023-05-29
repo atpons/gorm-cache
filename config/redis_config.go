@@ -1,8 +1,9 @@
 package config
 
 import (
-	"github.com/go-redis/redis"
 	"sync"
+
+	"github.com/redis/rueidis"
 )
 
 type RedisConfigMode int
@@ -15,16 +16,20 @@ const (
 type RedisConfig struct {
 	Mode RedisConfigMode
 
-	Options *redis.Options
-	Client *redis.Client
+	Options rueidis.ClientOption
+	Client  rueidis.Client
 
 	once sync.Once
 }
 
-func (c *RedisConfig) InitClient() *redis.Client {
+func (c *RedisConfig) InitClient() rueidis.Client {
 	c.once.Do(func() {
 		if c.Mode == RedisConfigModeOptions {
-			c.Client = redis.NewClient(c.Options)
+			client, err := rueidis.NewClient(c.Options)
+			if err != nil {
+				panic(err)
+			}
+			c.Client = client
 		}
 	})
 	return c.Client
