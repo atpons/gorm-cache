@@ -1,7 +1,7 @@
 package testkit
 
 import (
-	"github.com/Pacific73/gorm-cache/cache"
+	"github.com/atpons/gorm-cache/cache"
 	. "github.com/smartystreets/goconvey/convey"
 
 	"gorm.io/gorm"

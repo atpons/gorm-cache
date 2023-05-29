@@ -8,9 +8,9 @@ import (
 	"github.com/redis/rueidis"
 	"gorm.io/gorm/logger"
 
-	"github.com/Pacific73/gorm-cache/cache"
+	"github.com/atpons/gorm-cache/cache"
 
-	"github.com/Pacific73/gorm-cache/config"
+	"github.com/atpons/gorm-cache/config"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
