@@ -91,7 +91,7 @@ func TestMain(m *testing.M) {
 
 	searchCache, err = cache.NewGorm2Cache(&config.CacheConfig{
 		CacheLevel:           config.CacheLevelOnlySearch,
-		CacheStorage:         config.CacheStorageMemory,
+		CacheStorage:         config.CacheStorageRedis,
 		RedisConfig:          cache.NewRedisConfigWithClient(redisClient),
 		InvalidateWhenUpdate: true,
 		CacheTTL:             5000,
@@ -106,7 +106,7 @@ func TestMain(m *testing.M) {
 
 	primaryCache, err = cache.NewGorm2Cache(&config.CacheConfig{
 		CacheLevel:           config.CacheLevelOnlyPrimary,
-		CacheStorage:         config.CacheStorageMemory,
+		CacheStorage:         config.CacheStorageRedis,
 		RedisConfig:          cache.NewRedisConfigWithClient(redisClient),
 		InvalidateWhenUpdate: true,
 		CacheTTL:             5000,
@@ -121,7 +121,7 @@ func TestMain(m *testing.M) {
 
 	allCache, err = cache.NewGorm2Cache(&config.CacheConfig{
 		CacheLevel:           config.CacheLevelAll,
-		CacheStorage:         config.CacheStorageMemory,
+		CacheStorage:         config.CacheStorageRedis,
 		RedisConfig:          cache.NewRedisConfigWithClient(redisClient),
 		InvalidateWhenUpdate: true,
 		CacheTTL:             5000,

@@ -74,8 +74,6 @@ func (c *Gorm2Cache) Init() error {
 
 	if c.Config.CacheStorage == config.CacheStorageRedis {
 		c.cache = &data_layer.RedisLayer{}
-	} else if c.Config.CacheStorage == config.CacheStorageMemory {
-		c.cache = &data_layer.MemoryLayer{}
 	}
 
 	if c.Config.DebugLogger == nil {

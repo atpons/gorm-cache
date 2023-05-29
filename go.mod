@@ -3,7 +3,6 @@ module github.com/atpons/gorm-cache
 go 1.20
 
 require (
-	github.com/karlseguin/ccache/v2 v2.0.8
 	github.com/redis/rueidis v1.0.6
 	github.com/smartystreets/goconvey v1.7.2
 	gorm.io/driver/mysql v1.3.3
