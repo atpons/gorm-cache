@@ -1,0 +1,32 @@
+name: Test
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+jobs:
+  run:
+    name: Run CI
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      matrix:
+        operating-system:
+          - ubuntu-20.04
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup DB
+        run: |
+          docker-compose -f ${{ github.workspace }}/docker-compose-gh-actions.yml up -d
+      - name: Verify DB connection
+        env:
+          PORT: ${{ job.services.db.ports[3306] }}
+        run: |
+          while ! mysqladmin ping -h"127.0.0.1" -P"$PORT" --silent; do
+            sleep 1
+          done
+      - uses: actions/setup-go@v3
+        with:
+          go-version-file: go.mod
+      - name: Run tests
+        run: go test ./...

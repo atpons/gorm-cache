@@ -1,5 +1,5 @@
-[![GoVersion](https://img.shields.io/github/go-mod/go-version/Pacific73/gorm-cache)](https://github.com/Pacific73/gorm-cache/blob/master/go.mod)
-[![Release](https://img.shields.io/github/v/release/Pacific73/gorm-cache)](https://github.com/Pacific73/gorm-cache/releases)
+[![GoVersion](https://img.shields.io/github/go-mod/go-version/Pacific73/gorm-cache)](https://github.com/atpons/gorm-cache/blob/master/go.mod)
+[![Release](https://img.shields.io/github/v/release/Pacific73/gorm-cache)](https://github.com/atpons/gorm-cache/releases)
 [![Apache-2.0 license](https://img.shields.io/badge/license-Apache2.0-brightgreen.svg)](https://opensource.org/licenses/Apache-2.0)
 
 [English Version](./README.md) | [中文版本](./README.ZH_CN.md)
@@ -18,7 +18,7 @@ We provide 2 types of cache storage here:
 ```go
 import (
     "context"
-    "github.com/Pacific73/gorm-cache/cache"
+    "github.com/atpons/gorm-cache/cache"
     "github.com/go-redis/redis"
 )
 

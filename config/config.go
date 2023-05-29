@@ -47,6 +47,5 @@ const (
 type CacheStorage int
 
 const (
-	CacheStorageMemory CacheStorage = 0
-	CacheStorageRedis  CacheStorage = 1
+	CacheStorageRedis CacheStorage = 1
 )

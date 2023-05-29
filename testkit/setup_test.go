@@ -5,20 +5,20 @@ import (
 	"os"
 	"testing"
 
+	"github.com/redis/rueidis"
 	"gorm.io/gorm/logger"
 
-	"github.com/Pacific73/gorm-cache/cache"
+	"github.com/atpons/gorm-cache/cache"
 
-	"github.com/Pacific73/gorm-cache/config"
-	"github.com/go-redis/redis"
+	"github.com/atpons/gorm-cache/config"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
 var (
 	username     = "root"
-	password     = "Zcydf741205,."
-	databaseName = "site_reldb"
+	password     = "root"
+	databaseName = "root"
 	ip           = "localhost"
 	port         = "3306"
 )
@@ -87,11 +87,11 @@ func TestMain(m *testing.M) {
 		os.Exit(-1)
 	}
 
-	redisClient := redis.NewClient(&redis.Options{Addr: redisIp + ":" + redisPort})
+	redisClient, _ := rueidis.NewClient(rueidis.ClientOption{InitAddress: []string{redisIp + ":" + redisPort}})
 
 	searchCache, err = cache.NewGorm2Cache(&config.CacheConfig{
 		CacheLevel:           config.CacheLevelOnlySearch,
-		CacheStorage:         config.CacheStorageMemory,
+		CacheStorage:         config.CacheStorageRedis,
 		RedisConfig:          cache.NewRedisConfigWithClient(redisClient),
 		InvalidateWhenUpdate: true,
 		CacheTTL:             5000,
@@ -106,7 +106,7 @@ func TestMain(m *testing.M) {
 
 	primaryCache, err = cache.NewGorm2Cache(&config.CacheConfig{
 		CacheLevel:           config.CacheLevelOnlyPrimary,
-		CacheStorage:         config.CacheStorageMemory,
+		CacheStorage:         config.CacheStorageRedis,
 		RedisConfig:          cache.NewRedisConfigWithClient(redisClient),
 		InvalidateWhenUpdate: true,
 		CacheTTL:             5000,
@@ -121,7 +121,7 @@ func TestMain(m *testing.M) {
 
 	allCache, err = cache.NewGorm2Cache(&config.CacheConfig{
 		CacheLevel:           config.CacheLevelAll,
-		CacheStorage:         config.CacheStorageMemory,
+		CacheStorage:         config.CacheStorageRedis,
 		RedisConfig:          cache.NewRedisConfigWithClient(redisClient),
 		InvalidateWhenUpdate: true,
 		CacheTTL:             5000,
